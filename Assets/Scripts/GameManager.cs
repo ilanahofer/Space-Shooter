@@ -10,16 +10,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // if the r key was pressed
-        // restart the current scene
         if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
         {
             SceneManager.LoadScene(1); // Current Game Scene
         }
 
 
-        // if esc key is pressed
-        // quit application
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();

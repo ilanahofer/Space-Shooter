@@ -9,18 +9,13 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyPrefab;
     [SerializeField]
     private GameObject _enemyContainer;
-    //[SerializeField]
-    //private GameObject _tripleShotPowerupPrefab;
 
     [SerializeField]
     private GameObject[] powerups;
 
     private bool _stopSpawning = false;
     
-    // Start is called before the first frame update
-    
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -32,25 +27,16 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnPowerupRoutine());
     }
 
-    //spawn game object every 5 seconds
-    //Create a Coroutine of type IEnumerator -- Yield Events
-    //while loop
-
 
     IEnumerator SpawnEnemyRoutine()      //needs a yield event, otherwise the computer will crash
     {
         yield return new WaitForSeconds(3.0f);
-        
-        //while loop (infinite loop)
-            //Instantiate enemy prefab
-            //yield wait for 5 seconds
 
         while(_stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
             GameObject newEnemy =  Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
-            //yield return null;    //waits 1 frame then calls the next line
             yield return new WaitForSeconds(5f);
         }
 

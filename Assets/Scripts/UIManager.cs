@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // handle to text
     [SerializeField]
     private Text _scoreText;
     [SerializeField]
@@ -19,10 +18,9 @@ public class UIManager : MonoBehaviour
 
     private GameManager _gameManager;
     
-    // Start is called before the first frame update
+
     void Start()
     {
-        // assign text Component to handle
         _scoreText.text = "Score: " + 0;
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
@@ -34,7 +32,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         
@@ -47,8 +45,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLives(int curentLives)
     {
-        // display img sprite
-        // give ti a new one based on the currentLives index
         _LivesImg.sprite = _liveSprites[curentLives];
 
         if(curentLives == 0)

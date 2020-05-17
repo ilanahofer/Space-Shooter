@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // public or private reference
-    // data type (int, float, bool, string)
-    // every variable has a name
-    // optional value assigned
-    // put an underscore before a private variable e.g. _speed
     [SerializeField]
     private float _speed = 6f;
     private float _speedMultiplier = 2;
@@ -31,7 +26,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject shieldVisualizer;
-    // variable reference to the shield visualizer
+
     [SerializeField]
     private GameObject _rightEngine;
     [SerializeField]
@@ -42,17 +37,13 @@ public class Player : MonoBehaviour
 
     private UIManager _uiManager;
 
-    // variable to store the audio clip
     [SerializeField]
     private AudioClip _laserSoundClip;
     private AudioSource _audioSource;
 
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        //take the current position = new position (0, 0, 0)
         transform.position = new Vector3(0, 0, 0);
 
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>(); //Find the GameObject. Then Get Component
@@ -80,7 +71,7 @@ public class Player : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         CalculateMovement();
@@ -106,28 +97,8 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
         transform.Translate(direction * _speed * Time.deltaTime);
-
-
-        //if player position on the y is greater than 0
-        //y position = 0
-        //else if position on the y is less than -3.8f
-        //y pos = -3.8f
-
-        //if (transform.position.y >= 0)
-        //{
-        //    transform.position = new Vector3(transform.position.x, 0, 0);
-        //}
-        //else if (transform.position.y <= -3.8f)
-        //{
-        //    transform.position = new Vector3(transform.position.x, -3.8f, 0);
-        //}
-
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
-        //if player on the x > 11
-        //x pos = -11
-        //else if player on the x is less than -11
-        //x pos = 11
 
         if (transform.position.x > 11.3f)
         {
@@ -141,12 +112,8 @@ public class Player : MonoBehaviour
 
     void FireLaser()
     {
-        //if I hit the space key
-        //spawn gameObject
 
         _canFire = Time.time + _fireRate;
-        //Debug.Log("Space Key pressed");
-
 
         if (_isTripleShotActive == true)
         {
@@ -157,7 +124,7 @@ public class Player : MonoBehaviour
             Instantiate(_laserPrefab, transform.position + _laserOffset, Quaternion.identity);
         }
 
-        // play the laser audio clip
+
         _audioSource.Play();
 
     }
@@ -165,21 +132,13 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        // if shield is active
         if(_isShieldActive == true)
         {
             _isShieldActive = false;
             shieldVisualizer.gameObject.SetActive(false);
-            // deactivate shield visualizer
             return;
         }
-        // do nothing...
-        // deactivate shield;
-        //return;
 
-        
-        //_lives = _lives -1;
-        //_lives -= 1;
         _lives--;
 
         if (_lives == 2)
@@ -190,15 +149,11 @@ public class Player : MonoBehaviour
         {
             _leftEngine.gameObject.SetActive(true);
         }
-        // if lives is 2
-        // enable right engine
-        // else if lives is 1
-        // enable left engine
+
 
         _uiManager.UpdateLives(_lives);
 
-        //check if dead
-        //destroy us
+
         if(_lives < 1)
         {
             //Communicate with the SpawnManager
@@ -213,19 +168,15 @@ public class Player : MonoBehaviour
     public void TripleShotActive()
     {
         _isTripleShotActive = true;
-        // start the power down coroutine for triple shot
         StartCoroutine(TripleShotPowerDownRoutine());
     }
 
 
-    // IEnumerator TripleShotPowerDownRoutine
     IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
     }
-    // wait 5 seconds
-    // set the triple shot to false
 
 
     public void SpeedBoostActive()
@@ -235,7 +186,7 @@ public class Player : MonoBehaviour
         StartCoroutine(SpeedBoostPowerDownRoutine());
     }
 
-    // IWnumerator SpeedBoostPowerDownRoutine
+
     IEnumerator SpeedBoostPowerDownRoutine()
     {
         yield return new WaitForSeconds(5.0f);
@@ -247,13 +198,10 @@ public class Player : MonoBehaviour
     public void ShieldActive()
     {
         _isShieldActive = true;
-        // enable shield visualizer
         shieldVisualizer.gameObject.SetActive(true);
     }
 
 
-    // method to add 10 to score!
-    // Communicate with the UI to update the score!
     public void AddScore(int points)
     {
         _score += points;
