@@ -12,6 +12,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Sprite[] _liveSprites;
     [SerializeField]
+    private Image _shieldStrengthImg;
+    [SerializeField]
+    private Sprite[] _shieldStrengthSprites;
+    [SerializeField]
     private Text _gameOverText;
     [SerializeField]
     private Text _restartText;
@@ -51,6 +55,12 @@ public class UIManager : MonoBehaviour
         {
             GameOverSequence();
         }
+    }
+
+    public void UpdateShieldStrength(int shieldStrength)
+    {
+        Debug.Log(shieldStrength);
+        _shieldStrengthImg.sprite = _shieldStrengthSprites[shieldStrength];
     }
 
 

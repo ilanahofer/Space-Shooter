@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject shieldVisualizer;
+    [SerializeField]
+    private int _shieldStrength = 0;
 
     [SerializeField]
     private GameObject _rightEngine;
@@ -136,10 +138,23 @@ public class Player : MonoBehaviour
     {
         if(_isShieldActive == true)
         {
-            _isShieldActive = false;
-            shieldVisualizer.gameObject.SetActive(false);
-            return;
+            if (_shieldStrength > 1)
+            {
+                _shieldStrength--;
+                _uiManager.UpdateShieldStrength(_shieldStrength);
+                return;
+            }
+            else
+            {
+                _shieldStrength--;
+                _isShieldActive = false;
+                shieldVisualizer.gameObject.SetActive(false);
+                _uiManager.UpdateShieldStrength(_shieldStrength);
+                return;
+            }
+
         }
+
 
         _lives--;
 
@@ -201,6 +216,8 @@ public class Player : MonoBehaviour
     {
         _isShieldActive = true;
         shieldVisualizer.gameObject.SetActive(true);
+        _shieldStrength = 3;
+        _uiManager.UpdateShieldStrength(_shieldStrength);
     }
 
 
