@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private float _speed = 6f;
     private float _speedMultiplier = 2;
     [SerializeField]
+    private float _speedThrustersAdd = 3f;
+    [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _tripleShotPrefab;
@@ -81,7 +83,7 @@ public class Player : MonoBehaviour
             FireLaser();
         }
 
-
+        Thrusters();
 
     }
 
@@ -208,5 +210,16 @@ public class Player : MonoBehaviour
         _uiManager.UpdateScore(_score);
     }
 
+    public void Thrusters()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _speed = _speed + _speedThrustersAdd;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _speed = _speed - _speedThrustersAdd;
+        }
+    }
 
 }
