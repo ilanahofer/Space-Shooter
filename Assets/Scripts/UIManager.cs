@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateShieldStrength(int shieldStrength)
     {
-        Debug.Log(shieldStrength);
+        // Debug.Log(shieldStrength);
         _shieldStrengthImg.sprite = _shieldStrengthSprites[shieldStrength];
     }
 

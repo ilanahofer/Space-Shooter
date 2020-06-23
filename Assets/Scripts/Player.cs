@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireRate = 0.15f;
     private float _canFire = -1f;
+    private float _shotsToFire = 15;
+    private bool _outOfAmmo = false;
     [SerializeField]
     private int _lives = 3;
     private SpawnManager _spawnManager;
@@ -44,7 +46,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip _laserSoundClip;
     private AudioSource _audioSource;
-    //test
+
+    [SerializeField]
+    private AudioClip _outOfAmmoAudioClip;
 
 
     void Start()
@@ -88,6 +92,7 @@ public class Player : MonoBehaviour
 
         Thrusters();
 
+
     }
 
     void CalculateMovement()
@@ -118,20 +123,42 @@ public class Player : MonoBehaviour
     void FireLaser()
     {
 
-        _canFire = Time.time + _fireRate;
+        checkAmmo();
 
-        if (_isTripleShotActive == true)
+        if (_outOfAmmo == false)
         {
-            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+            _canFire = Time.time + _fireRate;
+
+            if (_isTripleShotActive == true)
+            {
+                Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+                _shotsToFire -= 3;
+            }
+            else
+            {
+                Instantiate(_laserPrefab, transform.position + _laserOffset, Quaternion.identity);
+                _shotsToFire -= 1;
+            }
+
+
+            _audioSource.Play();
+            Debug.Log(_shotsToFire);
         }
         else
         {
-            Instantiate(_laserPrefab, transform.position + _laserOffset, Quaternion.identity);
+            Debug.Log("Out of Ammo");
+            AudioSource.PlayClipAtPoint(_outOfAmmoAudioClip, transform.position);
         }
+        
 
+    }
 
-        _audioSource.Play();
-
+    public void checkAmmo()
+    {
+        if (_shotsToFire == 0)
+        {
+            _outOfAmmo = true;
+        }
     }
 
 
