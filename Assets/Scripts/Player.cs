@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
         {
             _canFire = Time.time + _fireRate;
 
-            if (_isTripleShotActive == true)
+            if ((_isTripleShotActive == true) && (_shotsToFire > 2))
             {
                 Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
                 _shotsToFire -= 3;
@@ -155,7 +155,7 @@ public class Player : MonoBehaviour
 
     public void checkAmmo()
     {
-        if (_shotsToFire == 0)
+        if (_shotsToFire < 1)
         {
             _outOfAmmo = true;
         }
@@ -265,6 +265,14 @@ public class Player : MonoBehaviour
         {
             _speed = _speed - _speedThrustersAdd;
         }
+    }
+
+
+    public void AmmoReload()
+    {
+        _shotsToFire = 15;
+        _outOfAmmo = false;
+        // Debug.Log(_outOfAmmo);
     }
 
 }

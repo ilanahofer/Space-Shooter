@@ -1023,6 +1023,7 @@ MonoBehaviour:
   - {fileID: 971622132661220607, guid: a512eb60580188d40ae8dbe4de3ebec5, type: 3}
   - {fileID: 3728112148344517788, guid: e42bf4bd146c4c240b1bf7263f309444, type: 3}
   - {fileID: 218435735036820142, guid: d8ead6b14085f7f4b961c5e36074e962, type: 3}
+  - {fileID: 6110322848270052852, guid: 957f284eaf3d6f346be7306adc746d36, type: 3}
 --- !u!4 &949718732
 Transform:
   m_ObjectHideFlags: 0
@@ -1163,6 +1164,7 @@ MonoBehaviour:
   _leftEngine: {fileID: 422884106}
   _score: 0
   _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _outOfAmmoAudioClip: {fileID: 8300000, guid: e260c519461c4bf4f8e9008ba1a7be12, type: 3}
 --- !u!212 &1152131669
 SpriteRenderer:
   m_ObjectHideFlags: 0
