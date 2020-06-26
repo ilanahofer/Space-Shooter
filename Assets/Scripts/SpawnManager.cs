@@ -53,7 +53,7 @@ public class SpawnManager : MonoBehaviour
         {
             // every 3-7 seconds, spawn a powerup
             Vector3 posToSpawnPowerup = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            int randomPowerUp = Random.Range(0, 4);
+            int randomPowerUp = Random.Range(0, 5);
             Instantiate(powerups[randomPowerUp], posToSpawnPowerup, Quaternion.identity);
             yield return new WaitForSeconds(Random.Range(3.0f, 7.0f));
         }

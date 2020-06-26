@@ -275,4 +275,24 @@ public class Player : MonoBehaviour
         // Debug.Log(_outOfAmmo);
     }
 
+
+    public void HealthReload()
+    {
+        if (_lives < 3)
+        {
+            _lives += 1;
+
+            if (_lives == 3)
+            {
+                _rightEngine.gameObject.SetActive(false);
+            }
+            else if (_lives == 2)
+            {
+                _leftEngine.gameObject.SetActive(false);
+            }
+
+            _uiManager.UpdateLives(_lives);
+        }
+    }
+
 }
